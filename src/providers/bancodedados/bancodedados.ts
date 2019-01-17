@@ -59,7 +59,9 @@ export class BancodedadosProvider {
       ['CREATE TABLE IF NOT EXISTS aluno (id integer  primary key AUTOINCREMENT NOT NULL, nome TEXT, data TEXT, escola TEXT, serie TEXT, responsavel TEXT, contato TEXT, logradouro TEXT, numero integer, cep TEXT, bairro TEXT, cidade TEXT, estado TEXT, complemento TEXT, observacao TEXT )'],
       ['CREATE TABLE IF NOT EXISTS usuarios (id integer primary key AUTOINCREMENT NOT NULL,nome TEXT, email TEXT,senha TEXT)'],
       ['CREATE TABLE IF NOT EXISTS turmas (id integer primary key AUTOINCREMENT NOT NULL,nome TEXT)'],
+      ['CREATE TABLE IF NOT EXISTS turma_alu_voluntario (id integer primary key AUTOINCREMENT NOT NULL,id_aluno integer, voluntario_id integer)'],
       ['CREATE TABLE IF NOT EXISTS estados (id integer primary key AUTOINCREMENT NOT NULL, nome TEXT)']
+
       // ['CREATE TABLE IF NOT EXISTS chamada (id integer primary key AUTOINCREMENT NOT NULL, barra integer, quantidade integer, responsavel integer, deposito_id integer, empresa integer, lote TEXT, FOREIGN KEY(deposito_id) REFERENCES depositos(id), FOREIGN KEY(responsavel) REFERENCES usuarios(pessoa_id))']
     ])
       .then(() => console.log('Tabelas criadas'))
