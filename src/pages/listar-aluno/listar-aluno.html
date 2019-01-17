@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Lista de Alunos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="cor">
+  <ion-list class="cor">
+    <ion-item-sliding class="borda" *ngFor="let aluno of alunos">
+      <button ion-item (click)="editarAluno(aluno.id)" class="cor">
+        <h1><ion-icon name="person"></ion-icon>{{ aluno.nome }}</h1>
+        <h3> <ion-icon name="calendar"></ion-icon>{{ aluno.data }}</h3>
+      </button>
+      <ion-item-options side="left" class="cor">
+        <button ion-button color="azul" (click)="enviarAluno(aluno)">
+          <ion-icon name="cloud-upload"></ion-icon>Enviar</button>
+        <button ion-button color="danger" (click)="deletarAluno(aluno)">
+          <ion-icon name="trash"></ion-icon>Deletar</button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-label *ngIf="alunos.length > 1">
+      <button ion-button icon-left color="azulescuro" (click)="enviarTodos()">
+        <ion-icon name="cloud-upload"></ion-icon> Enviar Todos</button>
+    </ion-label>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="adicionarAluno()">
+      <img src="./assets/adicionar_aluno.png" size="20">
+    </button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="danger">
+      <ion-title>Usuário: {{nome_usuario}}</ion-title>
+    </ion-toolbar>
+  </ion-footer>

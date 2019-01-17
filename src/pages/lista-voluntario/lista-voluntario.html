@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Lista de Voluntários
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="cor">
+  <ion-list class="cor">
+    <ion-item-sliding *ngFor="let voluntario of voluntarios">
+      <button ion-item (click)="editarVoluntario(voluntario.id)" class="cor">
+        <h1><ion-icon name="person"></ion-icon> {{ voluntario.nome }}</h1>
+        <h3><ion-icon name="mail"></ion-icon> {{ voluntario.email }}</h3>
+        <h3><ion-icon name="call"></ion-icon> {{ voluntario.contato }}</h3>
+      </button>
+      <ion-item-options side="left" class="cor">
+          <button ion-button color="azul" (click)="enviarVoluntario(voluntario)">
+              <ion-icon name="cloud-upload"></ion-icon>Enviar</button>
+        <button ion-button color="danger" (click)="deletarVoluntario(voluntario)">
+          <ion-icon name="trash"></ion-icon>Deletar</button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-label *ngIf="voluntarios.length > 1">
+        <button ion-button icon-left color="azulescuro" (click)="enviarTodos()">
+          <ion-icon name="cloud-upload"></ion-icon> Enviar Todos</button>
+      </ion-label>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="adicionarVoluntario()">
+      <img src="./assets/add_voluntario.png" size="20">
+    </button>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+    <ion-toolbar color="danger">
+      <ion-title>Usuário: {{nome_usuario}}</ion-title>
+    </ion-toolbar>
+  </ion-footer>

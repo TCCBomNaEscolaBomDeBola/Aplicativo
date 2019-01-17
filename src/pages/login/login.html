@@ -1,0 +1,33 @@
+
+<ion-content class="background">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<ion-card>
+		<ion-avatar item-start>
+			<img src="./assets/bola.svg" size="40" class="imagem">
+		</ion-avatar>
+		<h1 class="p">Bom na Escola, Bom de Bola</h1>
+
+		<ion-card-content>
+			<!--	<button class="bottom" ion-button block color="primarilly" (click)="Config()"> Configurar </button> -->
+			<ion-list no-line>
+				<form padding [formGroup]="loginForm" (submit)="logarApp()" novalidate>
+					<ion-item>
+						<ion-input type="text" [(ngModel)]="usuario" formControlName="usuario" placeholder="Usuário"></ion-input>
+					</ion-item>
+					<br>
+					<ion-item>
+						<ion-input type="password" [(ngModel)]="senha" formControlName="senha" placeholder="Senha"></ion-input>
+					</ion-item>
+
+					<br>
+					<button ion-button icon-left block color="primarilly" [disabled]="loginForm.invalid" class="login-button">
+						<ion-icon name="log-in"></ion-icon> Entrar</button>
+				</form>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

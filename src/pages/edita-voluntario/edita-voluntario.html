@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Editar Voluntário
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="cor">
+  <form padding [formGroup]="voluntarioForm" (submit)="editar()" novalidate>
+    <ion-grid>
+      <ion-row>
+        <ion-item class="cor">
+          <ion-label color="primary" floating>Nome</ion-label>
+          <ion-input type="text" [(ngModel)]="model.nome" formControlName="nome"></ion-input>
+        </ion-item>
+
+        <ion-item class="cor">
+          <ion-label color="primary" floating>E-mail</ion-label>
+          <ion-input type="email" [(ngModel)]="model.email" formControlName="email">
+          </ion-input>
+        </ion-item>
+
+        <ion-col>
+          <ion-item class="cor">
+            <ion-label color="primary" floating>Senha</ion-label>
+            <ion-input type="password" [(ngModel)]="model.senha" formControlName="senha"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-item class="cor">
+          <ion-label color="primary" floating>Contato</ion-label>
+          <ion-input type="text" [(ngModel)]="model.contato" formControlName="contato"></ion-input>
+        </ion-item>
+
+        <br>
+        <button ion-button icon-left block color="secondary" [disabled]="voluntarioForm.invalid">
+          <ion-icon name="create"></ion-icon> Editar</button>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="danger">
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,28 @@
+page-home {
+  .background {
+      background-color:antiquewhite;
+
+      ion-card.card {
+         align-content: center;
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
+          height: 140px;
+          width: 140px;
+          float: left;
+          position: center;
+      }
+      
+      .esquerda{
+          float: left;
+        }
+        
+       .direita{
+          float: right;
+        }
+        .center{
+          left: 50%;
+          right: 50%;
+          float: center;
+        }
+}
+}

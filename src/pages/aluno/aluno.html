@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Cadastrar Aluno</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+
+      <ion-item>
+        <ion-label color="primary" floating>Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="nome"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" floating>Data de Nascimento</ion-label>
+        <ion-input type="date" [(ngModel)]="data" [brmasker]="{mask:'00/00/0000', len:10}"></ion-input>
+      </ion-item>
+      <ion-col width-80>
+        <ion-item>
+          <ion-label color="primary" floating>Escola</ion-label>
+          <ion-input type="text" [(ngModel)]="escola"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col width-20>
+        <ion-item>
+          <ion-label color="primary" floating>Série</ion-label>
+          <ion-input type="text" [(ngModel)]="serie"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-item>
+        <ion-label color="primary" floating>Responsável</ion-label>
+        <ion-input type="text" [(ngModel)]="responsavel"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label color="primary" floating>Contato</ion-label>
+        <ion-input type="text" [(ngModel)]="contato"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" floating>Logradouro</ion-label>
+        <ion-input type="text" [(ngModel)]="logradouro"></ion-input>
+      </ion-item>
+
+      <ion-col width-50>
+        <ion-item>
+          <ion-label color="primary" floating>Número</ion-label>
+          <ion-input type="number" [(ngModel)]="numero"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col width-50>
+        <ion-item>
+          <ion-label color="primary" floating>CEP</ion-label>
+          <ion-input type="text" [(ngModel)]="cep" [brmasker]="{mask:'00000-000', len:9}"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-item>
+        <ion-label color="primary" floating>Bairro</ion-label>
+        <ion-input type="text" [(ngModel)]="bairro"></ion-input>
+      </ion-item>
+      <ion-col width-50>
+        <ion-item>
+          <ion-label color="primary" floating>Cidade</ion-label>
+          <ion-input type="text" [(ngModel)]="cidade"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-item>
+        <ion-label color="primary" floating>Estado</ion-label>
+        <ion-select [(ngModel)]="estado" interface="popover">
+          <ion-option value="ac">Acre</ion-option>
+          <ion-option value="al">Alagoas</ion-option>
+          <ion-option value="ap">Amapá</ion-option>
+          <ion-option value="am">Amazonas</ion-option>
+          <ion-option value="ba">Bahia</ion-option>
+          <ion-option value="ce">Ceará</ion-option>
+          <ion-option value="df">Distrito Federal</ion-option>
+          <ion-option value="es">Espírito Santo</ion-option>
+          <ion-option value="go">Goiás</ion-option>
+          <ion-option value="ma">Maranhão</ion-option>
+          <ion-option value="mt">Mato Grosso</ion-option>
+          <ion-option value="ms">Mato Grosso do Sul</ion-option>
+          <ion-option value="mg">Minas Gerais</ion-option>
+          <ion-option value="pa">Pará</ion-option>
+          <ion-option value="pb">Paraíba</ion-option>
+          <ion-option value="pr">Paraná</ion-option>
+          <ion-option value="pe">Pernambuco</ion-option>
+          <ion-option value="pi">Piauí</ion-option>
+          <ion-option value="rj">Rio de Janeiro </ion-option>
+          <ion-option value="rn">Rio Grande do Norte</ion-option>
+          <ion-option value="rs">Rio Grande do Sul</ion-option>
+          <ion-option value="ro">Rondônia</ion-option>
+          <ion-option value="rr">Roraima </ion-option>
+          <ion-option value="sc">Santa Catarina</ion-option>
+          <ion-option value="sp">São Paulo</ion-option>
+          <ion-option value="se">Sergipe</ion-option>
+          <ion-option value="to">Tocantins</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" floating>Complemento</ion-label>
+        <ion-input type="text" [(ngModel)]="complemento"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Observação</ion-label>
+        <ion-input type="text" [(ngModel)]="observacao"></ion-input>
+      </ion-item>
+      <button ion-button icon-left block color="primarilly">
+        Salvar</button>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

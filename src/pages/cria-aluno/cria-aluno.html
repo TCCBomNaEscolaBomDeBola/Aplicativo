@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Cadastrar Aluno</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="cor">
+  <form padding [formGroup]="alunoForm" (submit)="salvar()" novalidate>
+    <ion-grid>
+      <ion-row>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Nome</ion-label>
+          <ion-input type="text" [(ngModel)]="model.nome" formControlName="nome"></ion-input>
+        </ion-item>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Data de Nascimento</ion-label>
+          <ion-input type="tel" [(ngModel)]="model.data" formControlName="data" [brmasker]="{mask:'00/00/0000', len:10}"></ion-input>
+        </ion-item>
+
+        <ion-col width-50>
+          <ion-item class="cor">
+            <ion-label color="primary" stacked>Escola</ion-label>
+            <ion-input type="text" [(ngModel)]="model.escola" formControlName="escola"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col width-50>
+          <ion-item class="cor">
+            <ion-label color="primary" stacked>Série</ion-label>
+            <ion-input type="text" [(ngModel)]="model.serie" formControlName="serie"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Responsável</ion-label>
+          <ion-input type="text" [(ngModel)]="model.responsavel" formControlName="responsavel"></ion-input>
+        </ion-item>
+
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Contato</ion-label>
+          <ion-input type="text" [(ngModel)]="model.contato" formControlName="contato"></ion-input>
+        </ion-item>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Logradouro</ion-label>
+          <ion-input type="text" [(ngModel)]="model.logradouro" formControlName="logradouro"></ion-input>
+        </ion-item>
+
+        <ion-col width-50>
+          <ion-item class="cor">
+            <ion-label color="primary" stacked>Número</ion-label>
+            <ion-input type="number" [(ngModel)]="model.numero" formControlName="numero"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col width-50>
+          <ion-item class="cor">
+            <ion-label color="primary" stacked>CEP</ion-label>
+            <ion-input type="tel" [(ngModel)]="model.cep" formControlName="cep" [brmasker]="{mask:'00000-000', len:9}"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Bairro</ion-label>
+          <ion-input type="text" [(ngModel)]="model.bairro" formControlName="bairro"></ion-input>
+        </ion-item>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Cidade</ion-label>
+          <ion-input type="text" [(ngModel)]="model.cidade" formControlName="cidade"></ion-input>
+        </ion-item>
+
+        <ion-item class="cor">
+          <ion-label color="primary" floating>Estado</ion-label>
+          <ion-select [(ngModel)]="model.estado" formControlName="estado" interface="popover">
+            <ion-option *ngFor="let estado of estados" value="{{ estado.nome }}">{{ estado.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Complemento</ion-label>
+          <ion-input type="text" [(ngModel)]="model.complemento" formControlName="complemento"></ion-input>
+        </ion-item>
+
+        <ion-item class="cor">
+          <ion-label color="primary" stacked>Observação</ion-label>
+          <ion-input type="text" [(ngModel)]="model.observacao" formControlName="observacao"></ion-input>
+        </ion-item>
+
+        <button ion-button icon-left block color="primary" [disabled]="alunoForm.invalid">
+          <ion-icon name="checkmark"></ion-icon> Salvar</button>
+
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer>
+    <ion-toolbar color="danger">
+    </ion-toolbar>
+  </ion-footer>
