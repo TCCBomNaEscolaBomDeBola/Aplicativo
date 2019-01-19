@@ -22,6 +22,7 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
 import { BancodedadosProvider } from '../providers/bancodedados/bancodedados';
 import { EstadosProvider } from '../providers/estados/estados';
 import {ListaChamadaPage} from '../pages/lista-chamada/lista-chamada';
+import { TurmaProvider } from '../providers/turma/turma';
  
 
  
@@ -72,6 +73,7 @@ import {ListaChamadaPage} from '../pages/lista-chamada/lista-chamada';
     BancodedadosProvider,
     EstadosProvider,
     EstadosProvider,
+    TurmaProvider,
  
   ]
 })

@@ -14,12 +14,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'lista-chamada.html',
 })
 export class ListaChamadaPage {
-
+  nome_usuario: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaChamadaPage');
+    this.nome_usuario = window.sessionStorage.getItem('nome');
   }
 
 }
