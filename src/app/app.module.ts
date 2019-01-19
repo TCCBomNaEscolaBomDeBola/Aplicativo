@@ -15,12 +15,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { SQLite } from '@ionic-native/sqlite';
-import {ConfiguracaoPage } from '../pages/configuracao/configuracao';
+import { ConfiguracaoPage } from '../pages/configuracao/configuracao';
 import { VoluntarioProvider } from '../providers/voluntario/voluntario';
 import { AlunoProvider } from '../providers/aluno/aluno';
 import { BrMaskerModule } from 'brmasker-ionic-3';
 import { BancodedadosProvider } from '../providers/bancodedados/bancodedados';
 import { EstadosProvider } from '../providers/estados/estados';
+import {ListaChamadaPage} from '../pages/lista-chamada/lista-chamada';
  
 
  
@@ -34,9 +35,9 @@ import { EstadosProvider } from '../providers/estados/estados';
     ListaVoluntarioPage,
     CriaVoluntarioPage,
     ListarAlunoPage,
-  //  InventarioPage,
     LoginPage,
-    ConfiguracaoPage
+    ConfiguracaoPage,
+    ListaChamadaPage
     
   ],
   imports: [
@@ -54,10 +55,10 @@ import { EstadosProvider } from '../providers/estados/estados';
     CriaAlunoPage,
     ListaVoluntarioPage,
     CriaVoluntarioPage,
-    //InventarioPage,
     ListarAlunoPage,
     LoginPage,
-    ConfiguracaoPage
+    ConfiguracaoPage,
+    ListaChamadaPage
 
   ],
   providers: [

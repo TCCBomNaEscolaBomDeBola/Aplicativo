@@ -58,11 +58,9 @@ export class BancodedadosProvider {
       ['CREATE TABLE IF NOT EXISTS voluntario (id integer  primary key AUTOINCREMENT NOT NULL, nome TEXT, email TEXT, contato TEXT, senha TEXT)'],
       ['CREATE TABLE IF NOT EXISTS aluno (id integer  primary key AUTOINCREMENT NOT NULL, nome TEXT, data TEXT, escola TEXT, serie TEXT, responsavel TEXT, contato TEXT, logradouro TEXT, numero integer, cep TEXT, bairro TEXT, cidade TEXT, estado TEXT, complemento TEXT, observacao TEXT )'],
       ['CREATE TABLE IF NOT EXISTS usuarios (id integer primary key AUTOINCREMENT NOT NULL,nome TEXT, email TEXT,senha TEXT)'],
-      ['CREATE TABLE IF NOT EXISTS turmas (id integer primary key AUTOINCREMENT NOT NULL,nome TEXT)'],
-      ['CREATE TABLE IF NOT EXISTS turma_alu_voluntario (id integer primary key AUTOINCREMENT NOT NULL,id_aluno integer, voluntario_id integer)'],
+      ['CREATE TABLE IF NOT EXISTS turmas (id integer primary key ,nome TEXT)'],
+      ['CREATE TABLE IF NOT EXISTS turma_voluntario (id integer primary key AUTOINCREMENT NOT NULL, id_voluntario integer, FOREIGN KEY(id_voluntario) REFERENCES voluntario(id))'],
       ['CREATE TABLE IF NOT EXISTS estados (id integer primary key AUTOINCREMENT NOT NULL, nome TEXT)']
-
-      // ['CREATE TABLE IF NOT EXISTS chamada (id integer primary key AUTOINCREMENT NOT NULL, barra integer, quantidade integer, responsavel integer, deposito_id integer, empresa integer, lote TEXT, FOREIGN KEY(deposito_id) REFERENCES depositos(id), FOREIGN KEY(responsavel) REFERENCES usuarios(pessoa_id))']
     ])
       .then(() => console.log('Tabelas criadas'))
       .catch(e => console.error('Erro ao criar as tabelas', e));
@@ -79,7 +77,6 @@ export class BancodedadosProvider {
     this.restapiServiceProvider.getVoluntario()
       .then((result: any[]) => {
         this.usuario = result;
-        console.log('usuario' + this.usuario);
         this.usuario.forEach(usuarios => {
          let sql = 'select * from usuarios where email =? and senha = ?';
           let data = [usuarios.email,usuarios.senha];
@@ -104,32 +101,8 @@ export class BancodedadosProvider {
       })
     }
       
+
   
-
-
-
-
-
-
-  private insertConfiguracaoItems(db: SQLiteObject) {
-
-    db.executeSql('select COUNT(id) as qtd from configuracao', {})
-      .then((data: any) => {
-        //Se não existe nenhum registro
-        if (data.rows.item(0).qtd == 0) {
-
-          // Inserindo dados
-          db.sqlBatch([
-            ['insert into configuracao (endereco_ip) values (?)', ['10.0.8.120']],
-            ['insert into configuracao (endereco_ip) values (?)', ['10.0.8.102']],
-          ])
-            .then(() => console.log('Dados padrões incluídos'))
-            .catch(e => console.error('Erro ao incluir dados padrões', e));
-        }
-      })
-      .catch(e => console.error('Erro ao consultar a qtd de subgrupo de produtos', e));
-  }
-
   private inserirEstados(db: SQLiteObject) {
 
     db.executeSql('select COUNT(id) as qtd from estados', {})

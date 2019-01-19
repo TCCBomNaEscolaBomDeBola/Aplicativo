@@ -8,6 +8,7 @@ import { Voluntario } from '../voluntario/voluntario';
 export class RestProvider {
   api_aluno = 'http://api.bomnaescolaebomdebola.com/api/aluno';
   api_voluntario = 'http://api.bomnaescolaebomdebola.com/api/voluntario';
+  api_turma = 'http://api.bomnaescolaebomdebola.com/api/turma';
 
   constructor(public http: HttpClient) {
   }
@@ -24,15 +25,19 @@ export class RestProvider {
     });
   }
 
-
- public getVoluntarios():Observable<Voluntario[]>{
-    return this.http.get<Voluntario[]>(this.api_voluntario);
-  }
-  
-  public getAluno() {
-
+  public getTurma(){
     return new Promise(resolve => {
+      this.http.get(this.api_turma).subscribe(data =>{
+        resolve(data);
+      }, erro =>{
+        console.log(erro);
+      });
+    });
+  }
 
+
+  public getAluno() {
+    return new Promise(resolve => {
       this.http.get(this.api_aluno).subscribe(data => {
         resolve(data);
       }, err => {
@@ -67,16 +72,6 @@ export class RestProvider {
         });
     });
 
-  }
-
-  LoginVoluntario(login: string, senha: string) {
-    return new Promise(resolve => {
-      this.http.get(this.api_voluntario + '/' + login + '/' + senha).subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
-    });
   }
 
 }
