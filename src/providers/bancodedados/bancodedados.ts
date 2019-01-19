@@ -9,6 +9,7 @@ export class BancodedadosProvider {
   voluntario: any;
   aluno: any;
   usuario: any;
+  turma: any;
 
   constructor(private sqlite: SQLite, public http: HttpClient, private restapiServiceProvider: RestProvider) { }
 
@@ -39,6 +40,9 @@ export class BancodedadosProvider {
         // Inserindo dados de usuário
         this.InsertUsuarioItems(db);
         console.log(this.InsertUsuarioItems);
+
+        // Inserindo dados na  tabela turmas
+        this.InsertTurmaItems(db);
 
         // Inserindo dados alunos
         //this.InsertAlunos(db);
@@ -78,8 +82,8 @@ export class BancodedadosProvider {
       .then((result: any[]) => {
         this.usuario = result;
         this.usuario.forEach(usuarios => {
-         let sql = 'select * from usuarios where email =? and senha = ?';
-          let data = [usuarios.email,usuarios.senha];
+          let sql = 'select * from usuarios where email =? and senha = ?';
+          let data = [usuarios.email, usuarios.senha];
           return db.executeSql(sql, data)
             .then((data: any) => {
               //Se não existe nenhum registro
@@ -89,20 +93,45 @@ export class BancodedadosProvider {
                 ])
                   .then(() => console.log('Usuarios incluídos' + this.usuario))
                   .catch(e => console.error('Erro ao incluir Usuários', this.usuario));
-             } else {
-               // db.sqlBatch([
-                 // ['update usuarios set pessoa_id =?, login = ?, senha = ?, empresa = ?, nome_empresa = ? where pessoa_id = ? ', [usuarios.pessoa_id, usuarios.login, usuarios.senha, usuarios.empresa, usuarios.nome_empresa, usuarios.pessoa_id]],
+              } else {
+                // db.sqlBatch([
+                // ['update usuarios set pessoa_id =?, login = ?, senha = ?, empresa = ?, nome_empresa = ? where pessoa_id = ? ', [usuarios.pessoa_id, usuarios.login, usuarios.senha, usuarios.empresa, usuarios.nome_empresa, usuarios.pessoa_id]],
                 //])
-                  //.then(() => console.log('Dados padrões incluídos'))
-                  //.catch(e => console.error('Erro ao incluir dados padrões', e));
+                //.then(() => console.log('Dados padrões incluídos'))
+                //.catch(e => console.error('Erro ao incluir dados padrões', e));
               }
-          })
+            })
         })
       })
-    }
-      
+  }
 
-  
+
+  private InsertTurmaItems(db: SQLiteObject) {
+    this.restapiServiceProvider.getTurma()
+      .then((result: any[]) => {
+        this.turma = result;
+        this.turma.forEach(turmas => {
+          let sql = 'select * from turmas where id =?';
+          let data = [turmas.id];
+          return db.executeSql(sql, data)
+            .then((data: any) => {
+              //Se não existe nenhum registro
+              if (data.rows.length === 0) {
+                db.sqlBatch([
+                  ['insert into turma (id,nome) values (?, ?)', [turmas.Id, turmas.Nome]],
+                ])
+                  .then(() => console.log('Turmas incluídas' + this.turma))
+                  .catch(e => console.error('Erro ao incluir Turmas', this.turma));
+              } else {
+              }
+            })
+        })
+      })
+  }
+
+
+
+
   private inserirEstados(db: SQLiteObject) {
 
     db.executeSql('select COUNT(id) as qtd from estados', {})
