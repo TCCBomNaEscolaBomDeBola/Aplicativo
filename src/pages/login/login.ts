@@ -15,26 +15,19 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  loginForm: any = {};
   usuario: string;
   senha: string;
   usuario1: string;
   tabBarElement: any;
   splash = true;
   teste: string;
+  tipo: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, public loadingCtrl: LoadingController, formBuilder: FormBuilder, public restprovider: RestProvider,
     private bancodedados: BancodedadosProvider,
     public alertCtrl: AlertController
   ) {
     this.tabBarElement = document.querySelector('.tabbar');
-
-    this.loginForm = formBuilder.group({
-
-      usuario: ['', Validators.required],
-      senha: ['', Validators.required],
-
-    });
 
   }
   ionViewDidLoad() {
@@ -45,15 +38,17 @@ export class LoginPage {
     }, 4000);
 
   }
+  OcultarMostrarSenha() {
+    this.tipo = !this.tipo;
+  }
 
   logarApp() {
-    //this.usuario1 = this.usuario.toUpperCase();
     return this.bancodedados.getDB()
       .then((db: SQLiteObject) => {
         let sql = 'select nome from usuarios where senha =? and email =?',
-          data = [this.senha,this.usuario];
-          console.log('Usuario' + this.usuario);
-          console.log("senha" + this.senha);
+          data = [this.senha, this.usuario];
+        console.log('Usuario' + this.usuario);
+        console.log("senha" + this.senha);
         return db.executeSql(sql, data)
           .then((data: any) => {
             if (data.rows.length > 0) {
@@ -62,10 +57,7 @@ export class LoginPage {
               for (var i = 0; i < data.rows.length; i++) {
                 var usuario = data.rows.item(i);
                 usuarios.push(usuario);
-               let retorno = window.sessionStorage.setItem('nome', usuario.nome);
-
-               let nome = window.sessionStorage.getItem('nome');
-               console.log('nome' + nome);
+                let retorno = window.sessionStorage.setItem('nome', usuario.nome);
               }
               return usuarios;
             } else {
@@ -78,19 +70,7 @@ export class LoginPage {
             }
           });
       });
-
-
-
-
-    // this.restprovider.LoginVoluntario(this.usuario, this.senha)
-    // .then((result: any) => {
-   // this.navCtrl.push(TabsPage);
-    //})
-    //.catch((error: any) => {
-    // this.toast.create({ message: 'Login ou senha incorretos' + error.error, position: 'botton', duration: 3000 }).present();
-    // })
   }
-
 }
 
 

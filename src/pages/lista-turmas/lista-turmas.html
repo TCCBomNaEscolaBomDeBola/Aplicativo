@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Lista de Turmas
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="cor">
+  <!-- <ion-title color="primary">Turmas Cadastradas</ion-title><br><br> -->
+  <ion-list class="cor">
+    <ion-item-sliding *ngFor="let turma of turmas" (click)="visualizar(turma)">
+      <button ion-item class="cor">
+        <h1 class="texto">
+          <ion-icon name="people"></ion-icon>
+          {{ turma.nome }}</h1>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="danger">
+    <ion-title>Usuário: {{nome_usuario}}</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Chamada</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="cor">
+  <ion-list class="cor">
+    <ion-item-sliding class="borda" *ngFor="let c of chamada">
+      <button ion-item class="cor">
+        <input [(ngModel)]="modelo[c.id]" name="modelo" type="checkbox" value="{{ c.id }}">
+        <h1>
+          {{ c.nome }} </h1>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="FazerChamada()">
+      <img src="./assets/chamada.png" size="20">
+    </button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="danger">
+  </ion-toolbar>
+</ion-footer>

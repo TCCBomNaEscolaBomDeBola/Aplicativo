@@ -10,8 +10,15 @@
   <ion-list class="cor">
     <ion-item-sliding class="borda" *ngFor="let aluno of alunos">
       <button ion-item (click)="editarAluno(aluno.id)" class="cor">
-        <h1><ion-icon name="person"></ion-icon>{{ aluno.nome }}</h1>
-        <h3> <ion-icon name="calendar"></ion-icon>{{ aluno.data }}</h3>
+        <h1>
+          <ion-icon name="person"></ion-icon> {{ aluno.nome }}</h1>
+        <h3>
+          Data de Aniversário: {{ aluno.data }}</h3>
+        <h3>
+          Escola: {{aluno.escola}}</h3>
+        <h3>
+          <ion-icon name="call"></ion-icon> {{ aluno.contato }}</h3>
+
       </button>
       <ion-item-options side="left" class="cor">
         <button ion-button color="azul" (click)="enviarAluno(aluno)">
@@ -33,7 +40,7 @@
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar color="danger">
-      <ion-title>Usuário: {{nome_usuario}}</ion-title>
-    </ion-toolbar>
-  </ion-footer>
+  <ion-toolbar color="danger">
+    <ion-title>Usuário: {{nome_usuario}}</ion-title>
+  </ion-toolbar>
+</ion-footer>

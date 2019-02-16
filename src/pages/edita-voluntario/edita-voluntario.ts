@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SQLiteObject } from '@ionic-native/sqlite';
 import { BancodedadosProvider } from '../../providers/bancodedados/bancodedados';
 import { VoluntarioProvider, Voluntario } from '../../providers/voluntario/voluntario';
+import { TurmaProvider } from '../../providers/turma/turma';
 
 
 
@@ -18,9 +19,10 @@ export class EditaVoluntarioPage {
   voluntarioForm: any = {};
   tabBarElement: any;
   splash = true;
+  turma: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private toast: ToastController, formBuilder: FormBuilder, public database: BancodedadosProvider, public voluntarioProvider: VoluntarioProvider) {
+    private toast: ToastController, formBuilder: FormBuilder, public database: BancodedadosProvider, public voluntarioProvider: VoluntarioProvider, public turmaP: TurmaProvider) {
 
     this.model = new Voluntario();
 
@@ -37,12 +39,22 @@ export class EditaVoluntarioPage {
       contato: ['', Validators.required],
       senha: ['', Validators.required],
       email: ['', Validators.required],
+      turma: ['', Validators.required],
 
 
     });
 
   }
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+    this.turmaP.getAll()
+      .then((result: any[]) => {
+        this.turma = result;
+      })
+      .catch(() => {
+        this.toast.create({ message: 'Erro ao carregar as turmas.', duration: 3000, position: 'botton' }).present();
+      });
+
+  }
   editar() {
     this.EditarVoluntario()
       .then(() => {

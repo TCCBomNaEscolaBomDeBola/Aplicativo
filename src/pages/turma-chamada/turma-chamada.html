@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Turma Chamada
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <ul *ngFor="let a of aulas">
+    <li>{{ a.DataAula }}</li>
+  <!--  <li *ngFor="let nota of a.Turma">{{ nota.HorarioInicial }} - {{ nota.HorarioFinal }}</li> -->
+  </ul>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="danger">
+  </ion-toolbar>
+</ion-footer>

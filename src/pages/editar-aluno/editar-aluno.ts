@@ -5,6 +5,7 @@ import { SQLiteObject } from '@ionic-native/sqlite';
 import { EstadosProvider } from '../../providers/estados/estados';
 import { BancodedadosProvider } from '../../providers/bancodedados/bancodedados';
 import { AlunoProvider, Aluno } from '../../providers/aluno/aluno';
+import {TurmaProvider} from '../../providers/turma/turma'; 
 
 @IonicPage()
 @Component({
@@ -18,9 +19,10 @@ export class EditarAlunoPage {
   tabBarElement: any;
   splash = true;
   estados: any[];
+  turma: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private toast: ToastController, formBuilder: FormBuilder, public database: BancodedadosProvider, public AlunoProvider: AlunoProvider, private estadosProvider: EstadosProvider) {
+    private toast: ToastController, formBuilder: FormBuilder, public database: BancodedadosProvider, public AlunoProvider: AlunoProvider, private estadosProvider: EstadosProvider, public turmaP: TurmaProvider) {
 
     this.model = new Aluno();
 
@@ -45,6 +47,7 @@ export class EditarAlunoPage {
       bairro: ['', Validators.required],
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
+      turma: ['',Validators.required],
       complemento: ['', Validators.required],
       observacao: ['', Validators.required]
 
@@ -54,6 +57,14 @@ export class EditarAlunoPage {
   }
 
   ionViewDidLoad() {
+    this.turmaP.getAll()
+      .then((result: any[]) => {
+        this.turma = result;
+      })
+      .catch(() => {
+        this.toast.create({ message: 'Erro ao carregar as turmas.', duration: 3000, position: 'botton' }).present();
+      });
+
     this.estadosProvider.getAll()
       .then((result: any[]) => {
         this.estados = result;

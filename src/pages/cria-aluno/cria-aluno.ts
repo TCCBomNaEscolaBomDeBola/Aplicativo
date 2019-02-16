@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SQLiteObject } from '@ionic-native/sqlite';
 import { BancodedadosProvider } from '../../providers/bancodedados/bancodedados';
 import { AlunoProvider, Aluno } from '../../providers/aluno/aluno';
 import { EstadosProvider } from '../../providers/estados/estados';
+import { CriaTurmaAlunoPage } from '../cria-turma-aluno/cria-turma-aluno';
+import {TurmaProvider} from '../../providers/turma/turma';
+import { TurmaAluVolProvider } from '../../providers/turma-alu-vol/turma-alu-vol';
+
 
 
 @IonicPage()
@@ -17,10 +22,11 @@ export class CriaAlunoPage {
   alunoForm: any = {};
   tabBarElement: any;
   splash = true;
-  estados : any[];
+  estados: any[];
+  turma: any[]
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private toast: ToastController, formBuilder: FormBuilder, public database: BancodedadosProvider, public AlunoProvider: AlunoProvider,private estadosProvider: EstadosProvider) {
+    private toast: ToastController, formBuilder: FormBuilder, public bancodedados: BancodedadosProvider, public AlunoProvider: AlunoProvider, private estadosProvider: EstadosProvider, public TurmaAlVol: TurmaAluVolProvider, public turmaP: TurmaProvider) {
 
     this.model = new Aluno();
 
@@ -46,21 +52,33 @@ export class CriaAlunoPage {
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
       complemento: ['', Validators.required],
-      observacao: ['', Validators.required]
+      observacao: ['', Validators.required],
+      turma: ['', Validators.required]
 
     });
 
   }
 
-  ionViewDidLoad() { 
+  ionViewDidLoad() {
+
+    this.turmaP.getAll()
+      .then((result: any[]) => {
+        this.turma = result;
+      })
+      .catch(() => {
+        this.toast.create({ message: 'Erro ao carregar as turmas.', duration: 3000, position: 'botton' }).present();
+      });
 
     this.estadosProvider.getAll()
-    .then((result: any[]) => {
-      this.estados = result;
-    })
-    .catch(() => {
-      this.toast.create({ message: 'Erro ao carregar os estados.', duration: 3000, position: 'botton' }).present();
-    });
+      .then((result: any[]) => {
+        this.estados = result;
+      })
+      .catch(() => {
+        this.toast.create({ message: 'Erro ao carregar os estados.', duration: 3000, position: 'botton' }).present();
+      });
+
+  
+
   }
 
 
@@ -69,7 +87,6 @@ export class CriaAlunoPage {
       .then(() => {
         this.toast.create({ message: 'Aluno salvo com sucesso.', duration: 1000, position: 'botton' }).present();
         this.navCtrl.pop();
-        console.log(this.model);
       })
       .catch(() => {
         this.toast.create({ message: 'Erro ao salvar o aluno.', duration: 1000, position: 'botton' }).present();

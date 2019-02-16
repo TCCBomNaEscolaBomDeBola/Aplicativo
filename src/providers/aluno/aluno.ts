@@ -18,8 +18,8 @@ export class AlunoProvider {
   public insert(aluno: Aluno) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into aluno (nome, data, escola, serie, responsavel, contato, logradouro, numero, cep, bairro, cidade, estado, complemento, observacao) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        let data = [aluno.nome, aluno.data, aluno.escola, aluno.serie, aluno.responsavel, aluno.contato, aluno.logradouro, aluno.numero, aluno.cep, aluno.bairro, aluno.cidade, aluno.estado, aluno.complemento, aluno.observacao];
+        let sql = 'insert into aluno (nome, data, escola, serie, responsavel, contato, logradouro, numero, cep, bairro, cidade, turma, estado, complemento, observacao) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        let data = [aluno.nome, aluno.data, aluno.escola, aluno.serie, aluno.responsavel, aluno.contato, aluno.logradouro, aluno.numero, aluno.cep, aluno.bairro, aluno.cidade, aluno.turma, aluno.estado, aluno.complemento, aluno.observacao];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -29,8 +29,8 @@ export class AlunoProvider {
   public update(aluno: Aluno) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update aluno set  nome = ?, data = ?, escola = ? , serie = ?, responsavel = ? , contato = ?, logradouro = ?, numero = ? , cep = ? , bairro = ?, cidade = ? , estado = ? , complemento = ?, observacao = ? where id = ?';
-        let data = [aluno.nome, aluno.data, aluno.escola, aluno.serie, aluno.responsavel, aluno.contato, aluno.logradouro, aluno.numero, aluno.cep, aluno.bairro, aluno.cidade, aluno.estado, aluno.complemento, aluno.observacao, aluno.id];
+        let sql = 'update aluno set  nome = ?, data = ?, escola = ? , serie = ?, responsavel = ? , contato = ?, logradouro = ?, numero = ? , cep = ? , bairro = ?, cidade = ? , turma = ? , estado = ? , complemento = ?, observacao = ? where id = ?';
+        let data = [aluno.nome, aluno.data, aluno.escola, aluno.serie, aluno.responsavel, aluno.contato, aluno.logradouro, aluno.numero, aluno.cep, aluno.bairro, aluno.cidade, aluno.turma, aluno.estado, aluno.complemento, aluno.observacao, aluno.id];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -71,9 +71,11 @@ export class AlunoProvider {
               aluno.cep = item.cep;
               aluno.bairro = item.bairro;
               aluno.cidade = item.cidade;
+              aluno.turma = item.turma;
               aluno.estado = item.estado;
               aluno.complemento = item.complemento;
               aluno.observacao = item.observacao;
+
               return aluno;
             }
             return null;
@@ -87,7 +89,7 @@ export class AlunoProvider {
   public getAll() {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        return db.executeSql('select * from aluno', [])
+        return db.executeSql('SELECT a.*, t.nome as nome_turma FROM aluno a  inner join turmas t on a.turma = t.id', [])
           .then((data: any) => {
             if (data.rows.length > 0) {
               let alunos: any[] = [];
@@ -104,6 +106,26 @@ export class AlunoProvider {
       })
       .catch((e) => console.error(e));
   }
+
+  public NomeTurma(turma: number) {
+    return this.dbProvider.getDB()
+      .then((db: SQLiteObject) => {
+        return db.executeSql('SELECT nome from turmas where id = ?', [turma])
+          .then((data: any) => {
+            if (data.rows.length > 0) {
+              let alunos: any[] = [];
+              for (var i = 0; i < data.rows.length; i++) {
+                var alu = data.rows.item(i);
+                alunos.push(alu);
+
+                // retorna o nome da turma
+                return alu.nome;
+              }
+            }
+          })
+      })
+  }
+
 }
 
 
@@ -125,6 +147,7 @@ export class Aluno {
   estado: string;
   complemento: string;
   observacao: string;
+  turma: number;
 
 }
 

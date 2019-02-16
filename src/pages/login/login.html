@@ -1,4 +1,3 @@
-
 <ion-content class="background">
 	<br>
 	<br>
@@ -14,19 +13,20 @@
 		<ion-card-content>
 			<!--	<button class="bottom" ion-button block color="primarilly" (click)="Config()"> Configurar </button> -->
 			<ion-list no-line>
-				<form padding [formGroup]="loginForm" (submit)="logarApp()" novalidate>
 					<ion-item>
-						<ion-input type="text" [(ngModel)]="usuario" formControlName="usuario" placeholder="Usuário"></ion-input>
+						<ion-input type="text" [(ngModel)]="usuario" placeholder="E-mail"></ion-input>
 					</ion-item>
 					<br>
 					<ion-item>
-						<ion-input type="password" [(ngModel)]="senha" formControlName="senha" placeholder="Senha"></ion-input>
+						<ion-input [type]="tipo ? 'text' : 'password'" [(ngModel)]="senha" placeholder="Senha">
+						</ion-input>
+						<button (click)="OcultarMostrarSenha()" ion-button item-right>
+							<ion-icon [name]="tipo ? 'eye' : 'eye-off'"></ion-icon>
+						</button>
 					</ion-item>
-
 					<br>
-					<button ion-button icon-left block color="primarilly" [disabled]="loginForm.invalid" class="login-button">
+					<button ion-button icon-left block color="primarilly" (click)="logarApp()" class="login-button">
 						<ion-icon name="log-in"></ion-icon> Entrar</button>
-				</form>
 			</ion-list>
 		</ion-card-content>
 	</ion-card>

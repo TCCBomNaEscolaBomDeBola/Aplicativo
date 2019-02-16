@@ -5,6 +5,7 @@ import { VoluntarioProvider, Voluntario } from '../../providers/voluntario/volun
 import { RestProvider } from '../../providers/rest/rest';
 import { CriaVoluntarioPage } from '../cria-voluntario/cria-voluntario';
 import { BancodedadosProvider } from '../../providers/bancodedados/bancodedados';
+import { SQLiteObject } from '@ionic-native/sqlite';
 
 
 
@@ -20,7 +21,8 @@ export class ListaVoluntarioPage {
   searchText: string = null;
   modelo: any[] = [];
   user: any;
-  nome_usuario : any;
+  nome_usuario: any;
+  nome_turma: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,7 +31,7 @@ export class ListaVoluntarioPage {
     private restProvider: RestProvider,
     public alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
-    private database : BancodedadosProvider
+    private database: BancodedadosProvider
   ) {
 
     this.model = new Voluntario();
@@ -89,8 +91,13 @@ export class ListaVoluntarioPage {
   adicionarVoluntario() {
     this.navCtrl.push(CriaVoluntarioPage);
   }
-
   enviarVoluntario(voluntario: Voluntario) {
+    this.voluntarioProvider.NomeTurma(voluntario.turma)
+      .then((result: any) => {
+        this.nome_turma = result;
+        console.log(this.nome_turma);
+      });
+    // for( let id  of this.modelo)
     let alert = this.alertCtrl.create({
       title: 'Enviar Voluntário',
       message: 'Deseja realmente enviar este Voluntário?',
@@ -104,38 +111,33 @@ export class ListaVoluntarioPage {
         {
           text: 'ENVIAR',
           handler: () => {
-            let vol = { "nome": voluntario.nome, "contato": voluntario.contato, "senha": voluntario.senha, "email": voluntario.email };
+          let vol = { "IDTurma": voluntario.turma, "Turma": this.nome_turma, "Nome": voluntario.nome,
+           "Contato": voluntario.contato, "Senha": voluntario.senha, "Email": voluntario.email };
+            console.log('nome da turma' + this.nome_turma);
+            console.log(vol);
             this.restProvider.enviaVoluntario(vol).then((result) => {
-              this.toast.create({ message: 'Registro ' + voluntario.id + ' enviado com sucesso.', duration: 1000, position: 'botton' }).present();
+              this.toast.create({ message: 'Registro ' + voluntario.id + ' enviado com sucesso.', duration: 1000, position: 'botton' })
+              .present();
               this.navCtrl.setRoot(this.navCtrl.getActive().component);
-            
-
             }, (err) => {
-              this.toast.create({ message: 'Não foi possivel enviar o registro ' + voluntario.id, duration: 4000, position: 'botton' }).present();
+              this.toast.create({ message: 'Não foi possivel enviar o registro ' + voluntario.id, duration: 4000, position: 'botton' })
+              .present();
             })
           }
         }
       ]
     });
     alert.present();
+
   }
-
-
-
-
-
-  //filterVoluntarios(ev: any) {
-  //this.getAllVoluntarios();
-  //}
 
   enviarTodos() {
     let loading = this.loadingCtrl.create({
       content: 'Aguarde...',
     });
-
     loading.present();
-    for (let voluntario of this.voluntarios) {
-      let vol = { "nome": voluntario.nome, "contato": voluntario.contato, "login": voluntario.login, "senha": voluntario.senha, "email": voluntario.email };
+  for (let voluntario of this.voluntarios) {
+    let vol = { "IDTurma": voluntario.turma, "Nome": voluntario.nome, "Contato": voluntario.contato, "Senha": voluntario.senha, "Email": voluntario.email };
       this.restProvider.enviaVoluntario(vol).then((result) => {
         loading.dismiss();
         this.toast.create({ message: 'Registro ' + voluntario.id + ' enviado com sucesso.', duration: 1000, position: 'botton' }).present();
@@ -143,7 +145,7 @@ export class ListaVoluntarioPage {
       });
       () => {
         let alert = this.alertCtrl.create({
-          title: 'Error',
+          title: 'Erro',
           subTitle: 'Não foi possivel. Tente novamente.',
           buttons: ['Ok']
         })
@@ -151,14 +153,7 @@ export class ListaVoluntarioPage {
         alert.present();
       }
     }
-
-
-    //filterVoluntarios(ev: any) {
-    //this.getAllVoluntarios();
-    //}
   }
-
-
 }
 
 

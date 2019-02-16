@@ -87,6 +87,13 @@
         </ion-item>
 
         <ion-item class="cor">
+          <ion-label color="primary" floating>Turma</ion-label>
+          <ion-select [(ngModel)]="model.turma" formControlName="turma" interface="popover">
+            <ion-option *ngFor="let turma of turma" value="{{ turma.id }}">{{ turma.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="cor">
           <ion-label color="primary" stacked>Observação</ion-label>
           <ion-input type="text" [(ngModel)]="model.observacao" formControlName="observacao"></ion-input>
         </ion-item>

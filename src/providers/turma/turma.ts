@@ -30,6 +30,7 @@ export class TurmaProvider {
       })
       .catch((e) => console.error(e));
   }
+  
 }
 
 

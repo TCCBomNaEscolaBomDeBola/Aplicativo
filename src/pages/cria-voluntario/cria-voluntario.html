@@ -32,6 +32,13 @@
           <ion-input type="text" [(ngModel)]="model.contato" [brmasker]="{mask:'(00) 0000-0000', len:14}" formControlName="contato"></ion-input>
         </ion-item>
 
+        <ion-item class="cor">
+          <ion-label color="primary" floating>Turma</ion-label>
+          <ion-select [(ngModel)]="model.turma" formControlName="turma" interface="popover">
+            <ion-option *ngFor="let turma of turma" value="{{ turma.id }}">{{ turma.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+
         <br>
         <button ion-button icon-left block color="primary" [disabled]="voluntarioForm.invalid">
           <ion-icon name="checkmark"></ion-icon> Salvar</button>
@@ -41,6 +48,6 @@
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar color="danger">
-    </ion-toolbar>
-  </ion-footer>
+  <ion-toolbar color="danger">
+  </ion-toolbar>
+</ion-footer>

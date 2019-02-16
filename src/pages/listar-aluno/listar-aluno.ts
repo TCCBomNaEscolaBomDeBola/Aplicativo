@@ -17,7 +17,8 @@ export class ListarAlunoPage {
   searchText: string = null;
   modelo: any[] = [];
   user: any;
-  nome_usuario:any;
+  nome_usuario: any;
+  nome_turma: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private toast: ToastController, private alunoProvider: AlunoProvider, private restProvider: RestProvider, public alertCtrl: AlertController, private loadingCtrl: LoadingController, ) {
 
@@ -79,6 +80,12 @@ export class ListarAlunoPage {
   }
 
   enviarAluno(aluno: Aluno) {
+
+    this.alunoProvider.NomeTurma(aluno.turma)
+      .then((result: any) => {
+        this.nome_turma = result;
+        console.log(this.nome_turma);
+      });
     let alert = this.alertCtrl.create({
       title: 'Enviar Aluno',
       message: 'Deseja realmente enviar este Aluno?',
@@ -92,7 +99,11 @@ export class ListarAlunoPage {
         {
           text: 'ENVIAR',
           handler: () => {
-            let alu = { "nome": aluno.nome, "dataNasc": aluno.data, "escola": aluno.escola, "serie": aluno.serie, "responsavel": aluno.responsavel, "contato": aluno.contato, "logradouro": aluno.logradouro, "numero": aluno.numero, "cep": aluno.cep, "bairro": aluno.bairro, "cidade": aluno.cidade, "estado": aluno.estado, "complemento": aluno.complemento, "observacao": aluno.observacao };
+            console.log('id da turma' + aluno.turma);
+            //  "Turma"[{"IdTurma": aluno.turma}],
+            //  {"IdTurma": aluno.turma, "Turma":this.nome_turma},
+            let alu = { "Turmas": [{ "Id": aluno.turma, "Nome": this.nome_turma }], "Nome": aluno.nome, "DataNasc": aluno.data, "Escola": aluno.escola, "Serie": aluno.serie, "Responsavel": aluno.responsavel, "Contato": aluno.contato, "Logradouro": aluno.logradouro, "Numero": aluno.numero, "Cep": aluno.cep, "Bairro": aluno.bairro, "Cidade": aluno.cidade, "Estado": aluno.estado, "Complemento": aluno.complemento, "Observacao": aluno.observacao }
+            console.log(alu);
             this.restProvider.enviaAluno(alu).then((result) => {
               this.toast.create({ message: 'Registro ' + aluno.id + ' enviado com sucesso.', duration: 1000, position: 'botton' }).present();
               this.navCtrl.setRoot(this.navCtrl.getActive().component);
@@ -122,7 +133,11 @@ export class ListarAlunoPage {
 
     loading.present();
     for (let aluno of this.alunos) {
-      let alu = { "nome": aluno.nome, "dataNasc": aluno.data, "escola": aluno.escola, "serie": aluno.serie, "responsavel": aluno.responsavel, "contato": aluno.contato, "logradouro": aluno.logradouro, "numero": aluno.numero, "cep": aluno.cep, "bairro": aluno.bairro, "cidade": aluno.cidade, "estado": aluno.estado, "complemento": aluno.complemento, "observacao": aluno.observacao };
+      this.alunoProvider.NomeTurma(aluno.turma)
+      .then((result: any) => {
+        this.nome_turma = result;
+      });
+      let alu = { "Turmas": [{ "Id": aluno.turma, "Nome": this.nome_turma }], "Nome": aluno.nome, "DataNasc": aluno.data, "Escola": aluno.escola, "Serie": aluno.serie, "Responsavel": aluno.responsavel, "Contato": aluno.contato, "Logradouro": aluno.logradouro, "Numero": aluno.numero, "Cep": aluno.cep, "Bairro": aluno.bairro, "Cidade": aluno.cidade, "Estado": aluno.estado, "Complemento": aluno.complemento, "Observacao": aluno.observacao }
       this.restProvider.enviaAluno(alu).then((result) => {
         loading.dismiss();
         this.toast.create({ message: 'Registro ' + aluno.id + ' enviado com sucesso.', duration: 1000, position: 'botton' }).present();
@@ -130,7 +145,7 @@ export class ListarAlunoPage {
       });
       () => {
         let alert = this.alertCtrl.create({
-          title: 'Error',
+          title: 'Erro',
           subTitle: 'Não foi possivel. Tente novamente.',
           buttons: ['Ok']
         })

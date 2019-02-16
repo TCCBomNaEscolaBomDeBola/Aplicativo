@@ -43,35 +43,7 @@ page-login {
           border: medium none;
       }
   
-      .item {
-          margin-bottom:12px;
-          background: rgba(255, 255, 255, 0.6);
-          border: medium none;
-  
-          .text-input, {
-              color: black;
-          }
-  
-          input::-moz-placeholder  {
-              color: #fff!important;
-          }
-  
-          input:-moz-placeholder {
-              color: #fff!important;
-          }
-  
-          *::-webkit-input-placeholder  {
-              color: #fff!important;
-          }
-  
-          *:-ms-input-placeholder  {
-              color: #fff!important;
-          }
-  
-          *:-moz-placeholder  {
-              color: #fff!important;
-          }
-      }
+      
   
       .icon {
           padding-right: 10px;

@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Voluntario } from '../voluntario/voluntario';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RestProvider {
   api_aluno = 'http://api.bomnaescolaebomdebola.com/api/aluno';
   api_voluntario = 'http://api.bomnaescolaebomdebola.com/api/voluntario';
   api_turma = 'http://api.bomnaescolaebomdebola.com/api/turma';
+  api_aula = 'http://api.bomnaescolaebomdebola.com/api/aula';
 
   constructor(public http: HttpClient) {
   }
@@ -24,21 +26,35 @@ export class RestProvider {
       });
     });
   }
+  
 
-  public getTurma(){
+
+  public getTurma() {
     return new Promise(resolve => {
-      this.http.get(this.api_turma).subscribe(data =>{
+      this.http.get(this.api_turma).subscribe(data => {
         resolve(data);
-      }, erro =>{
+      }, erro => {
         console.log(erro);
       });
     });
   }
 
 
+
   public getAluno() {
     return new Promise(resolve => {
       this.http.get(this.api_aluno).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+  
+
+  public getAula() {
+    return new Promise(resolve => {
+      this.http.get(this.api_aula).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);

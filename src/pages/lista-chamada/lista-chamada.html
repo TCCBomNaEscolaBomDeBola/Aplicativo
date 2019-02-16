@@ -1,14 +1,39 @@
 <ion-header>
   <ion-navbar color="danger">
     <ion-title>
-      Lista de Chamadas
+      Lista de Aulas
     </ion-title>
   </ion-navbar>
 </ion-header>
 
+<ion-content padding class="cor">
+  <ion-list class="cor">
+    <ion-item-sliding class="borda" *ngFor="let aula of aulas">
+      <button ion-item class="cor" (click)="editarAula(aula)">
 
-<ion-content padding>
+          
+        <h1>
+          Turma: {{aula.nome}}</h1>
+        <h3>
+            <ion-icon name="calendar"></ion-icon> Data Inicio: {{ aula.dataInicio }}</h3>
+        <h3>
+            <ion-icon name="calendar"></ion-icon> Data Fim:{{ aula.dataFim }}</h3>
 
+
+      </button>
+      <ion-item-options side="left" class="cor">
+        <button ion-button color="azul">
+          <ion-icon name="cloud-upload"></ion-icon>Enviar</button>
+        <button ion-button color="danger" (click)="deletarAula(aula)">
+          <ion-icon name="trash"></ion-icon>Deletar</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="adicionarAula()">
+      <img src="./assets/chamadas.png" size="20">
+    </button>
+  </ion-fab>
 </ion-content>
 
 <ion-footer>

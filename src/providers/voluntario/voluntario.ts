@@ -13,8 +13,8 @@ export class VoluntarioProvider {
   public insert(voluntario: Voluntario) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into voluntario (nome, email, contato, senha) values ( ?, ?, ?, ?)';
-        let data = [voluntario.nome, voluntario.email, voluntario.contato, voluntario.senha];
+        let sql = 'insert into voluntario (nome, email, contato, senha,turma) values ( ?, ?, ?, ?, ?)';
+        let data = [voluntario.nome, voluntario.email, voluntario.contato, voluntario.senha, voluntario.turma];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -24,8 +24,8 @@ export class VoluntarioProvider {
   public update(voluntario: Voluntario) {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'update voluntario set  nome = ?, email = ?,  contato = ?, senha = ?  where id = ?';
-        let data = [voluntario.nome, voluntario.email,  voluntario.contato, voluntario.senha, voluntario.id];
+        let sql = 'update voluntario set  nome = ?, email = ?,  contato = ?, senha = ? , turma =? where id = ?';
+        let data = [voluntario.nome, voluntario.email, voluntario.contato, voluntario.senha, voluntario.turma, voluntario.id];
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
@@ -59,6 +59,7 @@ export class VoluntarioProvider {
               voluntario.email = item.email;
               voluntario.contato = item.contato;
               voluntario.senha = item.senha;
+              voluntario.turma = item.turma
               return voluntario;
             }
             return null;
@@ -102,7 +103,7 @@ export class VoluntarioProvider {
   public getAll() {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        return db.executeSql('select * from voluntario', [])
+        return db.executeSql('SELECT v.*, t.nome as nome_turma FROM voluntario v  inner join turmas t on v.turma = t.id ', [])
           .then((data: any) => {
             if (data.rows.length > 0) {
               let voluntarios: any[] = [];
@@ -119,8 +120,25 @@ export class VoluntarioProvider {
       })
       .catch((e) => console.error(e));
   }
-}
 
+  public NomeTurma(turma: number) {
+    return this.dbProvider.getDB()
+      .then((db: SQLiteObject) => {
+        return db.executeSql('SELECT nome from turmas where id = ?', [turma])
+          .then((data: any) => {
+            if (data.rows.length > 0) {
+              let voluntarios: any[] = [];
+              for (var i = 0; i < data.rows.length; i++) {
+                var vol = data.rows.item(i);
+                voluntarios.push(vol);
+                // retorna o nome da turma
+                return vol.nome;
+              }
+            }
+          })
+      })
+  }
+}
 
 
 export class Voluntario {
@@ -130,6 +148,7 @@ export class Voluntario {
   email: string;
   contato: string;
   senha: string;
+  turma: number;
 
 }
 

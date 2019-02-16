@@ -23,7 +23,14 @@ import { BancodedadosProvider } from '../providers/bancodedados/bancodedados';
 import { EstadosProvider } from '../providers/estados/estados';
 import {ListaChamadaPage} from '../pages/lista-chamada/lista-chamada';
 import { TurmaProvider } from '../providers/turma/turma';
- 
+import { TurmaAluVolProvider } from '../providers/turma-alu-vol/turma-alu-vol';
+import { CriaTurmaAlunoPage } from '../pages/cria-turma-aluno/cria-turma-aluno';
+import {ListaTurmasPage} from '../pages/lista-turmas/lista-turmas';
+import { TurmaChamadaPage } from '../pages/turma-chamada/turma-chamada';
+import {CriaAulaPage} from '../pages/cria-aula/cria-aula';
+import { AulaProvider } from '../providers/aula/aula';
+import {ChamadaPage} from '../pages/chamada/chamada';
+  
 
  
 @NgModule({
@@ -38,7 +45,12 @@ import { TurmaProvider } from '../providers/turma/turma';
     ListarAlunoPage,
     LoginPage,
     ConfiguracaoPage,
-    ListaChamadaPage
+    ListaChamadaPage,
+    CriaTurmaAlunoPage,
+    ListaTurmasPage,
+    TurmaChamadaPage,
+    CriaAulaPage,
+    ChamadaPage
     
   ],
   imports: [
@@ -59,7 +71,12 @@ import { TurmaProvider } from '../providers/turma/turma';
     ListarAlunoPage,
     LoginPage,
     ConfiguracaoPage,
-    ListaChamadaPage
+    ListaChamadaPage,
+    CriaTurmaAlunoPage,
+    ListaTurmasPage,
+    TurmaChamadaPage,
+    CriaAulaPage,
+    ChamadaPage
 
   ],
   providers: [
@@ -74,6 +91,9 @@ import { TurmaProvider } from '../providers/turma/turma';
     EstadosProvider,
     EstadosProvider,
     TurmaProvider,
+    TurmaAluVolProvider,
+    AulaProvider,
+    AulaProvider,
  
   ]
 })
