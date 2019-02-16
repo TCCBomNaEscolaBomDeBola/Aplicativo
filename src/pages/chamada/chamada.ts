@@ -50,6 +50,31 @@ export class ChamadaPage {
       })
   }
   FazerChamada(){
+  /*  return this.banco.getDB()
+    .then((db: SQLiteObject) => {
+      // for( let id  of this.modelo)
+      this.modelo.forEach((value, key) => {
+        (key + ': ' + value);
+        console.log('id turma' + key)
+        let sql = 'select * from turma_aluno where id_turma =? and id_aluno=?';
+        let data = [key, this.id_aluno];
+        return db.executeSql(sql, data)
+          .then((data: any) => {
+            if (data.rows.length === 0) {
+              console.log('id do aluno' + this.id_aluno);
+              db.sqlBatch([
+                ['insert into turma_aluno (id_aluno,id_turma) values (?,?)', [this.id_aluno, key]],
+              ])
+              this.toast.create({ message: 'Turma cadastrada.', duration: 2000, position: 'botton' }).present();
+              this.navCtrl.push(ListarAlunoPage);
+            } else {
+              this.toast.create({ message: 'Turma já cadastrada.', duration: 1000, position: 'botton' }).present()
+            }
+          })
+      })
+
+    })
+}*/
 
   }
 }

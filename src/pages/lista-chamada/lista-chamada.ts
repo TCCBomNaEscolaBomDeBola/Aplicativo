@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
-import { TurmaChamadaPage } from '../turma-chamada/turma-chamada';
 import { RestProvider } from '../../providers/rest/rest';
 import { CriaAulaPage } from '../cria-aula/cria-aula';
 import { AulaProvider, Aula } from '../../providers/aula/aula';
@@ -76,7 +75,8 @@ export class ListaChamadaPage {
             //Removendo do array de aluno
             var index = this.aul.indexOf(aula);
             this.aul.splice(index, 1);
-            this.toast.create({ message: 'Aula removida com sucesso.', duration: 1000, position: 'botton' }).present();
+            this.toast.create({ message: 'Aula removida com sucesso.', 
+            duration: 1000, position: 'botton' }).present();
           }
         }
       ]

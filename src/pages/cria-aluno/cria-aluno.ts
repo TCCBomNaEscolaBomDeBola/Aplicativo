@@ -5,7 +5,6 @@ import { SQLiteObject } from '@ionic-native/sqlite';
 import { BancodedadosProvider } from '../../providers/bancodedados/bancodedados';
 import { AlunoProvider, Aluno } from '../../providers/aluno/aluno';
 import { EstadosProvider } from '../../providers/estados/estados';
-import { CriaTurmaAlunoPage } from '../cria-turma-aluno/cria-turma-aluno';
 import {TurmaProvider} from '../../providers/turma/turma';
 import { TurmaAluVolProvider } from '../../providers/turma-alu-vol/turma-alu-vol';
 
@@ -58,6 +57,8 @@ export class CriaAlunoPage {
     });
 
   }
+
+  
 
   ionViewDidLoad() {
 

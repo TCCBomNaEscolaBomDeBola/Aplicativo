@@ -15,7 +15,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { SQLite } from '@ionic-native/sqlite';
-import { ConfiguracaoPage } from '../pages/configuracao/configuracao';
 import { VoluntarioProvider } from '../providers/voluntario/voluntario';
 import { AlunoProvider } from '../providers/aluno/aluno';
 import { BrMaskerModule } from 'brmasker-ionic-3';
@@ -24,9 +23,7 @@ import { EstadosProvider } from '../providers/estados/estados';
 import {ListaChamadaPage} from '../pages/lista-chamada/lista-chamada';
 import { TurmaProvider } from '../providers/turma/turma';
 import { TurmaAluVolProvider } from '../providers/turma-alu-vol/turma-alu-vol';
-import { CriaTurmaAlunoPage } from '../pages/cria-turma-aluno/cria-turma-aluno';
 import {ListaTurmasPage} from '../pages/lista-turmas/lista-turmas';
-import { TurmaChamadaPage } from '../pages/turma-chamada/turma-chamada';
 import {CriaAulaPage} from '../pages/cria-aula/cria-aula';
 import { AulaProvider } from '../providers/aula/aula';
 import {ChamadaPage} from '../pages/chamada/chamada';
@@ -44,12 +41,9 @@ import {ChamadaPage} from '../pages/chamada/chamada';
     CriaVoluntarioPage,
     ListarAlunoPage,
     LoginPage,
-    ConfiguracaoPage,
     ListaChamadaPage,
-    CriaTurmaAlunoPage,
     ListaTurmasPage,
-    TurmaChamadaPage,
-    CriaAulaPage,
+        CriaAulaPage,
     ChamadaPage
     
   ],
@@ -70,11 +64,8 @@ import {ChamadaPage} from '../pages/chamada/chamada';
     CriaVoluntarioPage,
     ListarAlunoPage,
     LoginPage,
-    ConfiguracaoPage,
     ListaChamadaPage,
-    CriaTurmaAlunoPage,
     ListaTurmasPage,
-    TurmaChamadaPage,
     CriaAulaPage,
     ChamadaPage
 
