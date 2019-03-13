@@ -6,14 +6,14 @@
 
 
 <ion-content padding class="cor">
-      <ion-list class="cor">
-          <ion-item *ngFor="let c of chamada" class="cor">
-            <input [(ngModel)]="modelo[c.id]" name="modelo" type="checkbox" value="{{ c.id }}">
-            <h2>{{ c.nome }}</h2>
-          </ion-item>
-        </ion-list>
+  <ion-list class="cor">
+    <ion-item *ngFor="let c of chamada" class="cor">
+      <input [(ngModel)]="modelo[c.id]" name="modelo" type="checkbox" value="{{ c.id }}">
+      <h2>{{ c.nome }}</h2>
+    </ion-item>
+  </ion-list>
   <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="FazerChamada()">
+    <button ion-fab color="primary" (click)="FazerChamada(chamada)">
       <img src="./assets/chamada.png" size="20">
     </button>
   </ion-fab>

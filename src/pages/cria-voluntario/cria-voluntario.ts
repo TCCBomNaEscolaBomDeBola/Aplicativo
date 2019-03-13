@@ -5,7 +5,6 @@ import { SQLiteObject } from '@ionic-native/sqlite';
 import { BancodedadosProvider } from '../../providers/bancodedados/bancodedados';
 import { VoluntarioProvider, Voluntario } from '../../providers/voluntario/voluntario';
 import { ListaVoluntarioPage } from '../lista-voluntario/lista-voluntario';
-import { CriaTurmaAlunoPage } from '../cria-turma-aluno/cria-turma-aluno';
 import { TurmaAluVolProvider } from '../../providers/turma-alu-vol/turma-alu-vol';
 import { TurmaProvider } from '../../providers/turma/turma';
 

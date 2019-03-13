@@ -19,7 +19,7 @@ export class BancodedadosProvider {
    */
   public getDB() {
     return this.sqlite.create({
-      name: 'fgfdgdggdgdgd.db',
+      name: 'aheunemseionome.db',
       location: 'default'
     });
   }
@@ -69,6 +69,7 @@ export class BancodedadosProvider {
       ['CREATE TABLE IF NOT EXISTS aluno (id integer  primary key AUTOINCREMENT NOT NULL, nome TEXT, data TEXT, escola TEXT, serie TEXT, responsavel TEXT, contato TEXT, logradouro TEXT, numero integer, cep TEXT, bairro TEXT, cidade TEXT, estado TEXT, complemento TEXT, observacao TEXT, turma integer, FOREIGN KEY(turma) REFERENCES turmas (id))'],
       ['CREATE TABLE IF NOT EXISTS usuarios (id integer primary key AUTOINCREMENT NOT NULL,nome TEXT, email TEXT,senha TEXT)'],
       ['CREATE TABLE IF NOT EXISTS turmas (id integer primary key ,nome TEXT,IdadeMinima integer,IdadeMaxima integer,HorarioInicial TEXT,HorarioFinal TEXT, DiaSemana TEXT)'],
+      ['CREATE TABLE IF NOT EXISTS chamada (id integer primary key ,aluno integer, presenca text ,turma integer, FOREIGN KEY(turma) REFERENCES turmas (id),FOREIGN KEY(aluno) REFERENCES todosAlunos (id))'],
       // ['CREATE TABLE IF NOT EXISTS turma_voluntario (id integer primary key AUTOINCREMENT NOT NULL, id_voluntario integer, id_turma, FOREIGN KEY(id_voluntario) REFERENCES voluntario(id),FOREIGN KEY(id_turma) REFERENCES turma(id))'],
       ['CREATE TABLE IF NOT EXISTS estados (id integer primary key AUTOINCREMENT NOT NULL, nome TEXT)']
     ])
