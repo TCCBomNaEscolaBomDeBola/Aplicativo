@@ -19,7 +19,7 @@ export class BancodedadosProvider {
    */
   public getDB() {
     return this.sqlite.create({
-      name: 'aheunemseionome.db',
+      name: 'ytutyutyutuy.db',
       location: 'default'
     });
   }

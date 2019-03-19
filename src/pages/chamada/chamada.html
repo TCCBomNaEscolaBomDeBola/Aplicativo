@@ -8,7 +8,8 @@
 <ion-content padding class="cor">
   <ion-list class="cor">
     <ion-item *ngFor="let c of chamada" class="cor">
-      <input [(ngModel)]="modelo[c.id]" name="modelo" type="checkbox" value="{{ c.id }}">
+      <input [(ngModel)]="modelo[c.id]" name="modelo" type="checkbox" value="{{ c.id }}">Presença
+      <input [(ngModel)]="teste[c.id]" name="teste" type="checkbox" value="{{ c.id }}">Falta
       <h2>{{ c.nome }}</h2>
     </ion-item>
   </ion-list>

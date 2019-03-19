@@ -14,6 +14,9 @@ export class ChamadaPage {
 
   chamada: any[] = [];
   modelo: any[] = [];
+  presenca: any;
+  teste: any[] = [];
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public database: BancodedadosProvider, public toast: ToastController) {
   }
@@ -56,25 +59,37 @@ export class ChamadaPage {
         this.modelo.forEach((value, id_aluno) => {
           (id_aluno + ': ' + value);
           let sql = 'select * from chamada where aluno =? and presenca=? and turma=?';
-          let data = [id_aluno, "S", turma];
+          let data = [id_aluno, "P", turma];
           return db.executeSql(sql, data)
             .then((data: any) => {
               if (data.rows.length === 0) {
                 db.sqlBatch([
-                  ['insert into chamada (aluno,presenca,turma) values (?,?,?)', [id_aluno, "S", turma]],
+                  ['insert into chamada (aluno,presenca,turma) values (?,?,?)', [id_aluno, "P", turma]],
                 ])
                 console.log("aluno:" + id_aluno + "turma:" + turma);
                 this.toast.create({ message: 'Chamada Realizada.', duration: 2000, position: 'botton' }).present();
               } else {
-                // edita informacoes da chamada
-                let sql = 'update chamada set  aluno = ?, presenca = ?,  turma = ?  where aluno = ?';
-                let data = [id_aluno, "N", turma, id_aluno];
-              }
+               }
             })
           //   })
         })
-        
-      })
+        this.teste.forEach((value, id_aluno) => {
+          (id_aluno + ': ' + value);
+          let sql = 'select * from chamada where aluno =? and presenca=? and turma=?';
+          let data = [id_aluno, "F", turma];
+          return db.executeSql(sql, data)
+            .then((data: any) => {
+              if (data.rows.length === 0) {
+                db.sqlBatch([
+                  ['insert into chamada (aluno,presenca,turma) values (?,?,?)', [id_aluno, "F", turma]],
+                ])
+                console.log("aluno:" + id_aluno + "turma:" + turma);
+                this.toast.create({ message: 'Chamada Realizada.', duration: 2000, position: 'botton' }).present();
+              }
 
+            })
+        })
+
+      })
   }
 }
